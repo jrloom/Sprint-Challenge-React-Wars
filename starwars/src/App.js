@@ -12,9 +12,7 @@ const App = () => {
   useEffect(() => {
     axios
       .get("https://swapi.co/api/people")
-      .then(resolve => {
-        setData(resolve.data.results);
-      })
+      .then(resolve => setData(resolve.data.results))
       .catch(error => console.log(error));
   }, []);
 

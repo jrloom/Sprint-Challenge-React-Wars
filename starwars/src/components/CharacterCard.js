@@ -5,7 +5,7 @@ const CharacterCard = props => {
   return (
     <Card raised>
       <Card.Content>
-        <Card.Header>{props.name}</Card.Header>
+        <Card.Header textAlign="center">{props.name}</Card.Header>
         <Segment.Group raised>
           <Segment>Born: {props.birth}</Segment>
           <Segment>Height: {props.height}</Segment>
