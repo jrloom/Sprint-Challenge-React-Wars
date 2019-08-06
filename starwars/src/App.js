@@ -1,19 +1,36 @@
-import React from 'react';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Container, Divider, Card } from "semantic-ui-react";
+
+import CharacterCard from "./components/CharacterCard";
+
+import "./App.css";
 
 const App = () => {
-  // Try to think through what state you'll need for this app before starting. Then build out
-  // the state properties here.
+  const [data, setData] = useState([]);
 
-  // Fetch characters from the star wars api in an effect hook. Remember, anytime you have a 
-  // side effect in a component, you want to think about which state and/or props it should
-  // sync up with, if any.
+  useEffect(() => {
+    axios
+      .get("https://swapi.co/api/people")
+      .then(resolve => setData(resolve.data.results))
+      .catch(error => console.log(error));
+  }, []);
 
   return (
-    <div className="App">
-      <h1 className="Header">React Wars</h1>
-    </div>
+    <>
+      <div className="App">
+        <h1 className="Header">React Wars</h1>
+      </div>
+      <Divider />
+      <Container>
+        <Card.Group itemsPerRow={3}>
+          {data.map((character, key) => {
+            return <CharacterCard key={key} name={character.name} birth={character.birth_year} height={character.height} mass={character.mass} />;
+          })}
+        </Card.Group>
+      </Container>
+    </>
   );
-}
+};
 
 export default App;
